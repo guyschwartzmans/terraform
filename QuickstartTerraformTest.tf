@@ -13,9 +13,15 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "rg" {
-        name = "QuickstartTerraformTest-rg"
-        location = "westeurope"
+module "ccs-resourcegroup" {
+    source  = "app.terraform.io/Ctac/ccs-resourcegroup/azure"
+    version = "1.0.0"
+
+    name      = "modulerg"
+    location  = "eastus"
+    tags      = {
+        "environment" = "test"
+    }
 }
 
 # az login 
